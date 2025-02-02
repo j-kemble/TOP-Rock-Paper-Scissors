@@ -34,8 +34,8 @@
     padding: 20rem 0 15rem 0;
 }
 
-.player,
-.computer {
+#player_count,
+#computer_count {
     font-size: 4rem;
     font-weight: 500;
 }
@@ -52,7 +52,7 @@
     font-size: 3rem;
 }
 
-.moves {
+#moves {
     font-weight: 300;
     font-size: 2rem;
 }
