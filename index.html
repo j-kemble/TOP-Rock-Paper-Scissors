@@ -11,35 +11,37 @@
   <body>
     <section id="header">
       <h1 id="title">Rock | Paper | Scissors</h1>
-      <p>Welcome to the game, enjoy!</p>
+      <p id="welcome">Welcome to the game, enjoy!</p>
     </section>
 
     <section id="game">
       <div id="player_container">
         <div id="player">
-          <h3>Player</h3>
+          <h3 class="player">Player</h3>
         </div>
         <div id="computer">
-          <h3>Computer</h3>
+          <h3 class="computer">Computer</h3>
         </div>
       </div>
       <div id="game_container">
         <div id="choose_moves">
-            <h2>Make your selection</h2>
-            <p>Moves remaining:</p>
+            <h2 class="selection">Make your selection</h2>
+            <p class="moves">Moves remaining: </p>
         </div>
         <div id="game_buttons">
-            <button id="rock">Rock</button>
-            <button id="Paper">Paper</button>
-            <button id="Scissors">Scissors</button>
+            <button class="button" id="rock">Rock</button>
+            <button class="button" id="Paper">Paper</button>
+            <button class="button" id="Scissors">Scissors</button>
         </div>
-        <div id="winner"></div>
+        <div id="winner">
+          <p class="winner">The winner is: </p>
+        </div>
       </div>
     </section>
 
     <section id="footer">
-        <p>This is a project from The Odin Project</p>
-        <p>Copyright © 2025</p>
+        <p class="footer">This is a project from The Odin Project</p>
+        <p class="copyright">Copyright © 2025</p>
     </section>
   </body>
 </html>
