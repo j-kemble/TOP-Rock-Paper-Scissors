@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css" />
-    <script src="game.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock | Paper | Scissors</title>
@@ -17,32 +16,44 @@
     <section id="game">
       <div id="player_container">
         <div id="player">
-          <h3 id="player_count">Player: <p class="player_count"></p></h3>
+          <h3 id="player_count">
+            Player:
+            <p class="player_count"></p>
+          </h3>
         </div>
         <div id="computer">
-          <h3 id="computer_count">Computer: <p class="computer_count"></p></h3>
+          <h3 id="computer_count">
+            Computer:
+            <p class="computer_count"></p>
+          </h3>
         </div>
       </div>
       <div id="game_container">
         <div id="choose_moves">
-            <h2 class="selection">Make your selection</h2>
-            <h6 id="moves">Moves remaining: <p class="moves"></p></h6>
+          <h2 class="selection">Make your selection</h2>
+          <div id="moves_container">
+            <h6 id="moves">
+              Moves remaining:
+              <p class="moves"></p>
+            </h6>
+          </div>
         </div>
         <div id="game_buttons">
-            <button class="button" id="rock">Rock</button>
-            <button class="button" id="Paper">Paper</button>
-            <button class="button" id="Scissors">Scissors</button>
+          <button class="button" id="rock">Rock</button>
+          <button class="button" id="Paper">Paper</button>
+          <button class="button" id="Scissors">Scissors</button>
         </div>
         <div id="winner">
-          <p id="round_winner">Round Winner: </p>
-          <p id="game_winner">Game Winner: </p>
+          <p id="round_winner">Round Winner:</p>
+          <p id="game_winner">Game Winner:</p>
         </div>
       </div>
     </section>
 
     <section id="footer">
-        <p class="footer">This is a project from The Odin Project</p>
-        <p class="copyright">Copyright © 2025</p>
+      <p class="footer">This is a project from The Odin Project</p>
+      <p class="copyright">Copyright © 2025</p>
     </section>
+    <script src="game.js"></script>
   </body>
 </html>
