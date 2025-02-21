@@ -1,90 +1,83 @@
 function computerChoice() {
-    const options = ['rock', 'paper', 'scissors'];
-    let randomChoice = Math.floor(Math.random() * options.length);
-    return options[randomChoice];
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomChoice = Math.floor(Math.random() * choices.length);
+    return choices[randomChoice];
 }
 
 function playerWon(player, computer) {
-    if (
-        player === 'rock' && computer === 'scissors' ||
-        player === 'paper' && computer === 'rock' ||
-        player === 'scissors' && computer === 'paper'
-    ) {
-        return true;
-    } else {
-        return false;
-    };
+    return (
+        (player === 'rock' && computer === 'scissors') ||
+        (player === 'paper' && computer === 'rock') ||
+        (player === 'scissors' && computer === 'paper')
+    );
 }
 
 let playerScore = 0;
 let computerScore = 0;
-let movesRemaining = 10;
 
-function roundWon(userChoice) {
-    const computerResult = computerChoice();
+function playRound(userChoice) {
+    const computerPick = computerChoice();
 
-    if (playerWon(userChoice, computerResult)) {
+    if (playerWon(userChoice, computerPick)) {
         playerScore++;
-        movesRemaining--;
-        return 'Player wins round!';
-    } else if (userChoice === computerResult) {
-        movesRemaining--;
-        return "It's a tie!";
+        return `You win! ${userChoice} beats ${computerPick}`;
+    } else if (userChoice === computerPick) {
+        return `It's a tie! You both picked ${userChoice}`;
     } else {
         computerScore++;
-        movesRemaining--;
-        return 'Computer wins round!';
+        return `Computer wins! ${computerPick} beats ${userChoice}`;
     }
 }
 
-const playerCount = document.getElementsByClassName('player_count')
-const computerCount = document.getElementsByClassName('computer_count')
-const remainingMoves = document.getElementsByClassName('moves')
-const roundWinner = document.getElementsByClassName('round_winner')
-const gameWinner = document.getElementsByClassName('game_winner')
-const resetButton = document.getElementById('resetGame')
+const playerScoreDisplay = document.querySelector('#playerScore');
+const computerScoreDisplay = document.querySelector('#computerScore');
+const resultDisplay = document.querySelector('#resultsMessage');
+const winnersDisplay = document.querySelector('#winnersMessage');
+const optionsDisplay = document.querySelectorAll('.optionsContainer');
+const resetButton = document.querySelector('#resetGame');
 
-function theResults(userChoice) {
-    roundWinner.textContent = roundWon(userChoice);
-    computerCount.textContent = computerScore;
-    playerCount.textContent = playerScore;
-    remainingMoves.textContent = movesRemaining;
+function getResults(userChoice) {
+    resultDisplay.textContent = playRound(userChoice);
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
 
-    if (playerScore > computerScore && movesRemaining === 0) {
-        gameWinner.textContent = 'Player wins the game!';
+    if (playerScore === 5 || computerScore === 5) {
+        winnersDisplay.textContent = `${
+            playerScore === 5 ? 'You' : 'Computer'
+        } have won the game!`;
+
         resetButton.style.display = 'block';
-    } else if (playerScore < computerScore && movesRemaining === 0) {
-        gameWinner.textContent = 'Computer wins the game!';
-        resetButton.style.display = 'block';
+        optionsDisplay.style.display = 'none';
     }
 }
 
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
-    movesRemaining = 0;
-    playerCount.textContent = playerScore;
-    computerCount.textContent = computerScore;
-    remainingMoves.textContent = movesRemaining;
-    roundWinner.textContent = '';
-    gameWinner.textContent = '';
+
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    resultDisplay.textContent = '';
+    winnersDisplay.textContent = '';
+
     resetButton.style.display = 'none';
+    optionsDisplay.style.display = 'block';
 }
 
 resetButton.addEventListener('click', resetGame);
 
-const rockButton = document.getElementById('rock')
-const paperButton = document.getElementById('paper')
-const scissorsButton = document.getElementById('scissors')
+const rockButton = document.querySelector('#rockButton');
+const paperButton = document.querySelector('#paperButton');
+const scissorsButton = document.querySelector('#scissorsButton');
 
-rockButton.addEventListener('click', function () {
-    theResults('rock');
+rockButton.addEventListener('click', function() {
+    getResults('rock');
 });
 
-paperButton.addEventListener('click', function () {
-    theResults('paper');
+paperButton.addEventListener('click', function() {
+    getResults('paper');
 });
 
-scissorsButton.addEventListener('click', function () {
-    theResults('scissors');
+scissorsButton.addEventListener('click', function() {
+    getResults('scissors');
 });

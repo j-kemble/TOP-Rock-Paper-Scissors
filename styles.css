@@ -1,146 +1,134 @@
 @import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
 
 * {
-    box-sizing: border-box;
     background-color: #526f78;
     color: #f3f3f3;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    max-height: 100vh;
+    font-family: 'turret road', sans-serif;
     font-size: 10px;
-    font-family: "turret road", sans-serif;
+    line-height: 1.5;
 }
 
-#header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 2rem;
-}
-
-#title {
+.title {
     font-size: 6rem;
     font-weight: 900;
+    text-align: center;
 }
 
-#welcome {
-    font-size: 3rem;
+.titleDescription {
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 4rem;
 }
 
-#player_container {
+.ruleContainer {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    width: 60vw;
+    padding: 10px 0;
+    margin: auto;
+    border-radius: 15px;
+    border: 3px solid #00e125
+}
+
+.rulesDecription {
+    display: flex;
+    justify-content: center;
+    font-size: 1.8rem;
+    line-height: 2;
+}
+
+.rulesDecription:hover {
+    cursor: pointer;
+}
+
+.rules {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    list-style: none;
+    border-bottom: 1px solid #fae900;
+    line-height: 2.5;
+}
+
+.scoreContainer {
+    display: flex;
     justify-content: space-around;
-    padding: 20rem 0 15rem 0;
+    margin: 4rem auto;
 }
 
-#player_count,
-#computer_count {
-    display: flex;
-    flex-direction: row;
-    font-size: 4rem;
-    font-weight: 500;
+.score {
+    font-size: 3rem;
+    font-weight: 700;
 }
 
-.player_count,
-.computer_count {
-    padding-left: 2rem;
-    font-size: 4rem;
-    font-weight: 500;
-}
-
-#choose_moves {
+.optionsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 5rem;
 }
 
-.selection {
-    font-weight: 700;
-    font-size: 3rem;
+.optionsContainer h3 {
+    font-size: 4rem;
+    font-weight: 900;
+    text-align: center;
+    padding-bottom: 3rem;
 }
 
-#moves {
+.buttonContainer {
     display: flex;
-    flex-direction: row;
-    font-weight: 300;
-    font-size: 2rem;
-}
-
-.moves {
-    padding-left: 2rem;
-    font-weight: 300;
-    font-size: 2rem;
-}
-
-#game_buttons {
-    display: flex;
-    flex-direction: row;
     justify-content: space-around;
+    width: 70vw;
+}
+
+.option {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #00e125;
+    color: #526f78;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.3rem;
+    margin: 15px 0;
+}
+
+#resultsMessage {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 15px 0;
+}
+
+#winnerMessage {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 15px 0;
 }
 
 .button {
-    border: none;
-    border-radius: 1.5rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #00e125;
-    color: #526f78;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-.button:hover {
-    background-color: #fae900;
-    transition: all 0.4s ease-in-out;
-}
-
-#winner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5rem;
-}
-
-#round_winner,
-#game_winner {
-    padding: 2rem 0;
-    font-size: 3rem;
-    font-weight: 900;
-}
-
-.round_winner,
-.game_winner {
-    font-size: 2.5rem;
-    font-weight: 900;
-}
-
-#reset {
-    display: flex;
-    justify-content: center;
-}
-
-#resetGame {
     display: none;
+    cursor: pointer;
     border: none;
-    border-radius: 1.5rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 6px;
     background-color: #00e125;
     color: #526f78;
-    width: 50vw;
-    padding: 1rem 2rem;
+    width: 30rem;
+    height: 5rem;
     font-size: 2rem;
-    font-weight: 500;
-}
-
-#resetGame:hover {
-    background-color: #fae900;
-    transition: all 0.4s ease-in-out;
-}
-
-#footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 5rem 2rem 0 2rem;
+    font-weight: 700;
 }
