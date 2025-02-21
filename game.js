@@ -1,84 +1,90 @@
-const playerCountElement = document.querySelector('.player_count');
-const computerCountElement = document.querySelector('.computer_count');
-const remainingMoves = document.querySelector('.moves')
-const rockButton = document.querySelector('#rock');
-const paperButton = document.querySelector('#paper');
-const scissorsButton = document.querySelector('#scissors');
-const roundWinner = document.querySelector('#round_winner');
-const gameResult = document.querySelector('#game_winner');
-const options = ['rock', 'paper', 'scissors'];
-let playerCount = 0;
-let computerCount = 0;
-let movesRemaining = 10;
-playerCountElement.textContent = playerCount;
-computerCountElement.textContent = computerCount;
-remainingMoves.textContent = movesRemaining;
-
-function getComputerChoice(choice) {
-    let randomIndex = Math.floor(Math.random() * options.length);
-    return options[randomIndex];
+function computerChoice() {
+    const options = ['rock', 'paper', 'scissors'];
+    let randomChoice = Math.floor(Math.random() * options.length);
+    return options[randomChoice];
 }
 
 function playerWon(player, computer) {
-    return (
+    if (
         player === 'rock' && computer === 'scissors' ||
         player === 'paper' && computer === 'rock' ||
         player === 'scissors' && computer === 'paper'
-    );
+    ) {
+        return true;
+    } else {
+        return false;
+    };
 }
 
-function roundResult(userOption) {
-    const computerResult = getComputerChoice();
+let playerScore = 0;
+let computerScore = 0;
+let movesRemaining = 10;
 
-    if (playerWon(userOption, computerResult)) {
-        playerCount++;
+function roundWon(userChoice) {
+    const computerResult = computerChoice();
+
+    if (playerWon(userChoice, computerResult)) {
+        playerScore++;
         movesRemaining--;
-        roundWinner.textContent = 'Player';
-    } else if (userOption === computerResult) {
-        roundWinner.textContent = 'Draw';
+        return 'Player wins round!';
+    } else if (userChoice === computerResult) {
         movesRemaining--;
+        return "It's a tie!";
     } else {
-        computerCount++;
+        computerScore++;
         movesRemaining--;
-        roundWinner.textContent = 'Computer';
+        return 'Computer wins round!';
     }
 }
 
-function gameResult() {
-    if (playerCount > computerCount) {
-        gameResult.textContent = 'Player';
-        rockButton.textContent = 'Play Again';
-        paperButton.textContent = 'Play Again';
-        scissorsButton.textContent = 'Play Again';
-        rockButton.addEventListener('click', resetGame);
-        paperButton.addEventListener('click', resetGame);
-        scissorsButton.addEventListener('click', resetGame);
-    } else if (playerCount < computerCount) {
-        gameResult.textContent = 'Computer';
-        rockButton.textContent = 'Play Again';
-        paperButton.textContent = 'Play Again';
-        scissorsButton.textContent = 'Play Again';
-        rockButton.addEventListener('click', resetGame);
-        paperButton.addEventListener('click', resetGame);
-        scissorsButton.addEventListener('click', resetGame);
-    } else {
-        gameResult.textContent = 'Draw';
-        rockButton.textContent = 'Play Again';
-        paperButton.textContent = 'Play Again';
-        scissorsButton.textContent = 'Play Again';
-        rockButton.addEventListener('click', resetGame);
-        paperButton.addEventListener('click', resetGame);
-        scissorsButton.addEventListener('click', resetGame);
+const playerCount = document.getElementsByClassName('player_count')
+const computerCount = document.getElementsByClassName('computer_count')
+const remainingMoves = document.getElementsByClassName('moves')
+const roundWinner = document.getElementsByClassName('round_winner')
+const gameWinner = document.getElementsByClassName('game_winner')
+const resetButton = document.getElementById('resetGame')
+
+function theResults(userChoice) {
+    roundWinner.textContent = roundWon(userChoice);
+    computerCount.textContent = computerScore;
+    playerCount.textContent = playerScore;
+    remainingMoves.textContent = movesRemaining;
+
+    if (playerScore > computerScore && movesRemaining === 0) {
+        gameWinner.textContent = 'Player wins the game!';
+        resetButton.style.display = 'block';
+    } else if (playerScore < computerScore && movesRemaining === 0) {
+        gameWinner.textContent = 'Computer wins the game!';
+        resetButton.style.display = 'block';
     }
 }
 
 function resetGame() {
-    playerCount = 0;
-    computerCount = 0;
-    movesRemaining = 10;
-    playerCountElement.textContent = playerCount;
-    computerCountElement.textContent = computerCount;
+    playerScore = 0;
+    computerScore = 0;
+    movesRemaining = 0;
+    playerCount.textContent = playerScore;
+    computerCount.textContent = computerScore;
     remainingMoves.textContent = movesRemaining;
     roundWinner.textContent = '';
-    gameResult.textContent = '';
+    gameWinner.textContent = '';
+    resetButton.style.display = 'none';
 }
+
+resetButton.addEventListener('click', resetGame);
+
+const rockButton = document.getElementById('rock')
+const paperButton = document.getElementById('paper')
+const scissorsButton = document.getElementById('scissors')
+
+rockButton.addEventListener('click', function () {
+    theResults('rock');
+});
+
+paperButton.addEventListener('click', function () {
+    theResults('paper');
+});
+
+scissorsButton.addEventListener('click', function () {
+    theResults('scissors');
+});

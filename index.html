@@ -18,13 +18,13 @@
         <div id="player">
           <h3 id="player_count">
             Player:
-            <p class="player_count"></p>
+            <p class="player_count">0</p>
           </h3>
         </div>
         <div id="computer">
           <h3 id="computer_count">
             Computer:
-            <p class="computer_count"></p>
+            <p class="computer_count">0</p>
           </h3>
         </div>
       </div>
@@ -34,7 +34,7 @@
           <div id="moves_container">
             <h6 id="moves">
               Moves remaining:
-              <p class="moves"></p>
+              <p class="moves">10</p>
             </h6>
           </div>
         </div>
@@ -44,8 +44,11 @@
           <button class="button" id="Scissors">Scissors</button>
         </div>
         <div id="winner">
-          <p id="round_winner">Round Winner:</p>
-          <p id="game_winner">Game Winner:</p>
+          <span id="round_winner">Round Winner: <p class="round_winner">___</p></span>
+          <span id="game_winner">Game Winner: <p class="game_winner">___</p></span>
+        </div>
+        <div id="reset">
+          <button id="resetGame">Reset Game</button>
         </div>
       </div>
     </section>
