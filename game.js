@@ -1,90 +1,120 @@
-function computerChoice() {
-    const options = ['rock', 'paper', 'scissors'];
-    let randomChoice = Math.floor(Math.random() * options.length);
-    return options[randomChoice];
-}
+// DOM elements
+const playerScoreDisplay = document.getElementById('player-score');
+const computerScoreDisplay = document.getElementById('computer-score');
+const roundMessage = document.getElementById('round-message');
+const winnerMessage = document.getElementById('winner-message');
+const playerChoiceDisplay = document.getElementById('player-choice-display');
+const computerChoiceDisplay = document.getElementById('computer-choice-display');
+const choices = document.querySelectorAll('.choice');
+const resetBtn = document.getElementById('reset-btn');
+const playerChoiceElement = document.querySelector('.player-choice');
+const computerChoiceElement = document.querySelector('.computer-choice');
 
-function playerWon(player, computer) {
-    if (
-        player === 'rock' && computer === 'scissors' ||
-        player === 'paper' && computer === 'rock' ||
-        player === 'scissors' && computer === 'paper'
-    ) {
-        return true;
-    } else {
-        return false;
-    };
-}
-
+// Game variables
 let playerScore = 0;
 let computerScore = 0;
-let movesRemaining = 10;
+const SCORE_LIMIT = 5;
+const choiceEmojis = {
+    rock: '🪨',
+    paper: '📄',
+    scissors: '✂️'
+};
 
-function roundWon(userChoice) {
-    const computerResult = computerChoice();
+// Add event listeners
+choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        if (playerScore < SCORE_LIMIT && computerScore < SCORE_LIMIT) {
+            playRound(choice.id);
+        }
+    });
+});
 
-    if (playerWon(userChoice, computerResult)) {
+resetBtn.addEventListener('click', resetGame);
+
+// Game functions
+function getComputerChoice() {
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * 3);
+    return choices[randomIndex];
+}
+
+function playRound(playerChoice) {
+    const computerChoice = getComputerChoice();
+
+    // Display choices
+    playerChoiceDisplay.textContent = choiceEmojis[playerChoice];
+    computerChoiceDisplay.textContent = choiceEmojis[computerChoice];
+
+    // Reset highlights
+    playerChoiceElement.classList.remove('highlight');
+    computerChoiceElement.classList.remove('highlight');
+
+    // Determine winner
+    let result;
+    if (playerChoice === computerChoice) {
+        result = "It's a tie!";
+    } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+    ) {
         playerScore++;
-        movesRemaining--;
-        return 'Player wins round!';
-    } else if (userChoice === computerResult) {
-        movesRemaining--;
-        return "It's a tie!";
+        playerScoreDisplay.textContent = playerScore;
+        result = "You win this round!";
+        playerChoiceElement.classList.add('highlight');
     } else {
         computerScore++;
-        movesRemaining--;
-        return 'Computer wins round!';
+        computerScoreDisplay.textContent = computerScore;
+        result = "Computer wins this round!";
+        computerChoiceElement.classList.add('highlight');
+    }
+
+    // Update round message
+    roundMessage.textContent = `You chose ${playerChoice}, computer chose ${computerChoice}. ${result}`;
+
+    // Check for game winner
+    if (playerScore >= SCORE_LIMIT || computerScore >= SCORE_LIMIT) {
+        endGame();
     }
 }
 
-const playerCount = document.getElementsByClassName('player_count')
-const computerCount = document.getElementsByClassName('computer_count')
-const remainingMoves = document.getElementsByClassName('moves')
-const roundWinner = document.getElementsByClassName('round_winner')
-const gameWinner = document.getElementsByClassName('game_winner')
-const resetButton = document.getElementById('resetGame')
+function endGame() {
+    const gameWinner = playerScore >= SCORE_LIMIT ? 'YOU ARE THE CHAMPION!' : 'COMPUTER IS THE CHAMPION!';
+    winnerMessage.textContent = gameWinner;
+    winnerMessage.classList.add('winner-animation');
 
-function theResults(userChoice) {
-    roundWinner.textContent = roundWon(userChoice);
-    computerCount.textContent = computerScore;
-    playerCount.textContent = playerScore;
-    remainingMoves.textContent = movesRemaining;
+    // Disable choices
+    choices.forEach(choice => {
+        choice.style.pointerEvents = 'none';
+    });
 
-    if (playerScore > computerScore && movesRemaining === 0) {
-        gameWinner.textContent = 'Player wins the game!';
-        resetButton.style.display = 'block';
-    } else if (playerScore < computerScore && movesRemaining === 0) {
-        gameWinner.textContent = 'Computer wins the game!';
-        resetButton.style.display = 'block';
-    }
+    // Show reset button
+    resetBtn.classList.add('visible');
 }
 
 function resetGame() {
+    // Reset scores
     playerScore = 0;
     computerScore = 0;
-    movesRemaining = 0;
-    playerCount.textContent = playerScore;
-    computerCount.textContent = computerScore;
-    remainingMoves.textContent = movesRemaining;
-    roundWinner.textContent = '';
-    gameWinner.textContent = '';
-    resetButton.style.display = 'none';
+    playerScoreDisplay.textContent = '0';
+    computerScoreDisplay.textContent = '0';
+
+    // Reset messages
+    roundMessage.textContent = 'Choose your weapon to start the battle!';
+    winnerMessage.textContent = '';
+    winnerMessage.classList.remove('winner-animation');
+
+    // Reset choice displays
+    playerChoiceDisplay.textContent = '?';
+    computerChoiceDisplay.textContent = '?';
+    playerChoiceElement.classList.remove('highlight');
+    computerChoiceElement.classList.remove('highlight');
+
+    // Enable choices
+    choices.forEach(choice => {
+        choice.style.pointerEvents = 'auto';
+    });
+
+    // Hide reset button
+    resetBtn.classList.remove('visible');
 }
-
-resetButton.addEventListener('click', resetGame);
-
-const rockButton = document.getElementById('rock')
-const paperButton = document.getElementById('paper')
-const scissorsButton = document.getElementById('scissors')
-
-rockButton.addEventListener('click', function () {
-    theResults('rock');
-});
-
-paperButton.addEventListener('click', function () {
-    theResults('paper');
-});
-
-scissorsButton.addEventListener('click', function () {
-    theResults('scissors');
-});

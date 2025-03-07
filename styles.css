@@ -1,146 +1,202 @@
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 * {
-    box-sizing: border-box;
-    background-color: #526f78;
-    color: #f3f3f3;
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    font-family: "turret road", sans-serif;
+    box-sizing: border-box;
+    font-family: 'Space Mono', monospace;
 }
 
-#header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 2rem;
-}
-
-#title {
-    font-size: 6rem;
-    font-weight: 900;
-}
-
-#welcome {
-    font-size: 3rem;
-}
-
-#player_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 20rem 0 15rem 0;
-}
-
-#player_count,
-#computer_count {
-    display: flex;
-    flex-direction: row;
-    font-size: 4rem;
-    font-weight: 500;
-}
-
-.player_count,
-.computer_count {
-    padding-left: 2rem;
-    font-size: 4rem;
-    font-weight: 500;
-}
-
-#choose_moves {
+body {
+    background-color: #0f0f1a;
+    color: #e0e0e0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 5rem;
+    padding: 2rem;
 }
 
-.selection {
-    font-weight: 700;
-    font-size: 3rem;
-}
-
-#moves {
-    display: flex;
-    flex-direction: row;
-    font-weight: 300;
-    font-size: 2rem;
-}
-
-.moves {
-    padding-left: 2rem;
-    font-weight: 300;
-    font-size: 2rem;
-}
-
-#game_buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.button {
-    border: none;
-    border-radius: 1.5rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #00e125;
-    color: #526f78;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-.button:hover {
-    background-color: #fae900;
-    transition: all 0.4s ease-in-out;
-}
-
-#winner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5rem;
-}
-
-#round_winner,
-#game_winner {
-    padding: 2rem 0;
-    font-size: 3rem;
-    font-weight: 900;
-}
-
-.round_winner,
-.game_winner {
+.game-title {
     font-size: 2.5rem;
-    font-weight: 900;
+    text-align: center;
+    color: #00ff99;
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+    margin-bottom: 2rem;
 }
 
-#reset {
-    display: flex;
-    justify-content: center;
-}
-
-#resetGame {
-    display: none;
-    border: none;
-    border-radius: 1.5rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #00e125;
-    color: #526f78;
-    width: 50vw;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-#resetGame:hover {
-    background-color: #fae900;
-    transition: all 0.4s ease-in-out;
-}
-
-#footer {
+.score-board {
     display: flex;
     justify-content: space-between;
-    padding: 5rem 2rem 0 2rem;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    background-color: #1a1a2e;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+.score {
+    text-align: center;
+    flex: 1;
+}
+
+.score h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #00ff99;
+}
+
+.score p {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    color: #ff3366;
+}
+
+.message-area {
+    width: 100%;
+    max-width: 600px;
+    min-height: 120px;
+    background-color: #1a1a2e;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px #00ff99;
+    text-align: center;
+}
+
+.round-message {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #00ffcc;
+}
+
+.winner-message {
+    font-size: 1.5rem;
+    color: #ff3366;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff3366;
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.choice {
+    background-color: #1a1a2e;
+    border: 3px solid #00ff99;
+    color: #00ff99;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+}
+
+.choice:hover {
+    background-color: #00ff99;
+    color: #1a1a2e;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 153, 0.5);
+}
+
+.result-display {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.player-choice, .computer-choice {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a2e;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff99;
+}
+
+.choice-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #00ff99;
+}
+
+.choice-display {
+    font-size: 3rem;
+    margin: 1rem 0;
+}
+
+.reset-btn {
+    background-color: #ff3366;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+    display: none;
+}
+
+.reset-btn:hover {
+    background-color: #ff6699;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 51, 102, 0.7);
+}
+
+.visible {
+    display: block;
+}
+
+.highlight {
+    border-color: #ff3366;
+    box-shadow: 0 0 15px #ff3366;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.winner-animation {
+    animation: pulse 0.5s infinite;
+}
+
+@media (max-width: 600px) {
+    .choices {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .result-display {
+        flex-direction: column;
+    }
 }
